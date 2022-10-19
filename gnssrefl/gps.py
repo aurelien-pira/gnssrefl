@@ -82,6 +82,50 @@ class wgs84:
     f  =  1./298.257223563 # flattening factor
     e = np.sqrt(2*f-f**2) # 
 
+def useful_t_tools(year, doy): #modified with dictionary
+    """
+    Original author: Kristine Larson
+    Modified by : Aurélien Pira
+    Date : 2022oct18
+    
+    Merging of 'ymd2doy' and 'ydoych' by K. Larson.
+    The return of the function is modified with a dictionary.
+    
+    Parameters
+    ----------
+    year :      integer
+    doy :       integer (day of year)
+    
+    Returns
+    ---------
+    year :      integer
+    month :     integer
+    day :       integer
+    cyyyy :     string (four character year)
+    cdoy :      string (three character day of year)
+    YMD :       string (date as in '19-12-01' for December 1, 2019)
+    """
+    #Extracts the year, month and day values as an integer since 'doy2ymd' function    
+    year, month, day = doy2ymd(year, doy)
+    
+    #Convert year and doy to various string format
+    str_doy = '{:03d}'.format(doy)
+    str_yyyy = str(year)
+    str_yy = str_yyyy[2:4]
+    
+    #cyyyy, cyy, cdoy = ydoych(year,doy) delete
+
+    str_dd = '{:02d}'.format(day)
+    str_month = char_month_converter(month)
+    YMD = str_yy + str_month + str_dd
+    
+    #Combine all values ​​in a dictionary
+    utt_val = {'year':year, 'month':month, 'day':day,
+             'str_doy':str_doy, 'str_yyyy':str_yyyy, 'str_yy':str_yy,
+             'str_dd':str_dd, 'str_month':str_month, 'YMD': YMD}
+    
+    return(utt_val)
+	
 def myfavoriteobs():
     """
     returns list of SNR obs needed for gfzrnx. 
